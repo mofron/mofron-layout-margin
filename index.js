@@ -4,34 +4,59 @@
  * @author simpart
  */
 
-mofron.layout.Margin = class extends mofron.layout.Base {
-    constructor (tp,v) {
+mofron.layout.Margin = class extends mofron.Layout {
+    constructor (tp,val) {
         try {
             super();
-            if ( ('string' != (typeof tp)) ||
-                 ( (''       != tp) && 
-                   ('top'    != tp) &&
-                   ('right'  != tp) && 
-                   ('bottom' != tp) && 
-                   ('left'   != tp) )      ||
-                 ('number' != (typeof v)) ) {
-                throw new Error('invalid parameter');
+            
+            var _tp  = (undefined === tp)  ? null : tp;
+            var _val = (undefined === val) ? null : val;
+            
+            if (null === _tp) {
+                throw new Error('invalid paramter');
+            } else if ('number' === (typeof _tp)) {
+                _val = _tp;
+                _tp  = '';
             }
-            this.type = tp;
-            this.val  = v;
+            
+            this.m_type  = null;
+            this.m_value = null;
+            
+            this.type(_tp);
+            this.value(_val);
         } catch (e) {
             console.error(e.stack);
             throw e;
         }
     }
     
-    layoutFunc (idx, tgt) {
+    layoutConts (idx, tgt) {
         try {
             var mg = 'margin';
-            if ('' !== this.type) {
-                mg += '-' + this.type;
+            if ('' !== this.type()) {
+                mg += '-' + this.type();
             }
-            tgt.getVdom().setStyle(mg, this.val + 'px');
+            tgt.vdom().style(mg, this.value() + 'px');
+        } catch (e) {
+            console.error(e.stack);
+            throw e;
+        }
+    }
+    
+    type (tp) {
+        try {
+            if (undefined === tp) {
+                return this.m_type;
+            }
+            if ( ('string' != (typeof tp)) ||
+                 ( (''       != tp) &&
+                   ('top'    != tp) &&
+                   ('right'  != tp) &&
+                   ('bottom' != tp) &&
+                   ('left'   != tp) ) ) {
+                throw new Error('invalid parameter');
+            }
+            this.m_type = tp;
         } catch (e) {
             console.error(e.stack);
             throw e;
@@ -40,11 +65,14 @@ mofron.layout.Margin = class extends mofron.layout.Base {
     
     value (val) {
         try {
-            var _val = (val === undefined) ? null : val;
-            if (null === _val) {
-                return this.val;
+            if (undefined === val) {
+                return this.m_value;
             }
-            this.val = _val;
+            
+            if ((null === val) || ('number' !== (typeof val))) {
+                throw new Error('invalid parameter');
+            }
+            this.m_value = val;
         } catch (e) {
             console.error(e.stack);
             throw e;
