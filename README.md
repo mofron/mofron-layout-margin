@@ -10,10 +10,10 @@ mofron install mofron-layout-padding
 ```javascript
 require('mofron');
 let Text    = require('mofron-comp-text');
-let Padding = require('mofron-layout-padding');
+let Margin = require('mofron-layout-margin');
 
 new mofron.Component({
-    layout  : new Padding('left',100),   // padding layout
+    layout  : new Margin('left',100),   // margin layout
     child   : [new Text('child 1'),
                new Text('child 2'),
                new Text('child 3')],
