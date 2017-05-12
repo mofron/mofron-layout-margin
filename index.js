@@ -31,7 +31,9 @@ mofron.layout.Margin = class extends mofron.Layout {
             if ('' !== this.type()) {
                 mg += '-' + this.type();
             }
-            tgt.vdom().style(mg, this.value() + 'px');
+            var setmgn = {};
+            setmgn[mg] = this.value() + 'px';
+            tgt.vdom().style(setmgn);
         } catch (e) {
             console.error(e.stack);
             throw e;
@@ -73,4 +75,5 @@ mofron.layout.Margin = class extends mofron.Layout {
         }
     }
 }
+mofron.layout.margin = {};
 module.exports = mofron.layout.Margin;
