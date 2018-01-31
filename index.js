@@ -10,14 +10,17 @@ mofron.layout.Margin = class extends mofron.Layout {
             super();
             this.name('Margin');
             
-            this.m_type  = null;
-            this.m_value = null;
-            
             if ('object' === typeof tp) {
                 this.prmOpt(tp);
             } else {
-                this.type(tp);
-                this.value(val);
+                if ('number' === typeof tp) {
+                    this.value(tp);
+                } else if ('string' === typeof tp) {
+                    this.type(tp);
+                    this.value(val);
+                } else {
+                    throw new Error('invalid parameter');
+                }
             }
         } catch (e) {
             console.error(e.stack);
@@ -43,7 +46,11 @@ mofron.layout.Margin = class extends mofron.Layout {
     type (tp) {
         try {
             if (undefined === tp) {
-                return this.m_type;
+                return (undefined === this.m_type) ? '' : this.m_type;
+            }
+            if (null === tp) {
+                this.m_type = '';
+                return;
             }
             if ( ('string' != (typeof tp)) ||
                  ( (''       != tp) &&

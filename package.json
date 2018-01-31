@@ -1,6 +1,6 @@
 {
   "name": "mofron-layout-margin",
-  "version": "0.0.8",
+  "version": "0.0.9",
   "description": "margin layout of mofron",
   "main": "index.js",
   "scripts": {
