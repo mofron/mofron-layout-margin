@@ -5,79 +5,65 @@
  */
 
 mofron.layout.Margin = class extends mofron.Layout {
-    constructor (tp,val) {
+    constructor (po, p2) {
         try {
             super();
             this.name('Margin');
+            this.prmOpt(po, p2);
             
-            this.m_type  = null;
-            this.m_value = null;
+            this.getParam().check(
+                (tp) => {
+                    try {
+                        if (undefined === tp) {
+                            return '';
+                        }
+                        if ( ('string' != (typeof tp)) ||
+                             ( (''       != tp) &&
+                               ('top'    != tp) &&
+                               ('right'  != tp) &&
+                               ('bottom' != tp) &&
+                               ('left'   != tp) ) ) {
+                            throw new Error('invalid parameter');
+                        }
+                    } catch (e) {
+                        console.error(e.stack);
+                        throw e;
+                    }
+                },
+                (val) => {
+                    try {
+                        if ( ('number' !== typeof val) && ('string' !== typeof val) ) {
+                            throw new Error('invalid parameter');
+                        }
+                    } catch (e) {
+                        console.error(e.stack);
+                        throw e;
+                    }
+                },
+            );
+        } catch (e) {
+            console.error(e.stack);
+            throw e;
+        }
+    }
+    
+    contents (idx, tgt) {
+        try {
+            let mg   = 'margin';
+            let type = this.value()[0];
+            let val  = this.value()[1];
             
-            if ('object' === typeof tp) {
-                this.prmOpt(tp);
-            } else {
-                if ('string' === typeof tp) {
-                    this.type(tp);
-                    this.value(val);
-                } else if ('number' === typeof tp) {
-                    this.value(tp);
-                }
+            if ('' !== type) {
+                mg += '-' + type;
             }
-        } catch (e) {
-            console.error(e.stack);
-            throw e;
-        }
-    }
-    
-    layoutConts (idx, tgt) {
-        try {
-            var mg = 'margin';
-            if ( ('' !== this.type()) && (null !== this.type())) {
-                mg += '-' + this.type();
-            }
-            var setmgn = {};
-            setmgn[mg] = this.value() + 'px';
-            tgt.vdom().style(setmgn);
-        } catch (e) {
-            console.error(e.stack);
-            throw e;
-        }
-    }
-    
-    type (tp) {
-        try {
-            if (undefined === tp) {
-                return (undefined === this.m_type) ? null : this.m_type;
-            }
-            if ( ('string' != (typeof tp)) ||
-                 ( (''       != tp) &&
-                   ('top'    != tp) &&
-                   ('right'  != tp) &&
-                   ('bottom' != tp) &&
-                   ('left'   != tp) ) ) {
-                throw new Error('invalid parameter');
-            }
-            this.m_type = tp;
-        } catch (e) {
-            console.error(e.stack);
-            throw e;
-        }
-    }
-    
-    value (val) {
-        try {
-            if (undefined === val) {
-                return this.m_value;
-            }
-            if ((null === val) || ('number' !== (typeof val))) {
-                throw new Error('invalid parameter');
-            }
-            this.m_value = val;
+            let setmgn = {};
+            setmgn[mg] = ('number' !== typeof val) ?  val : val + 'px';
+            tgt.adom().style(setmgn);
         } catch (e) {
             console.error(e.stack);
             throw e;
         }
     }
 }
-mofron.layout.margin = {};
 module.exports = mofron.layout.Margin;
+/* end of file */
