@@ -21,7 +21,7 @@ mofron.layout.Margin = class extends mofron.Layout {
         try {
             let mg     = (null === this.type()) ? 'margin' : 'margin' + '-' + this.type();
             let setmgn = {};
-            setmgn[mg] = ('number' !== typeof this.value()) ?  this.value() : this.value() + 'px';
+            setmgn[mg] = ('number' !== typeof this.value()) ?  this.value() : this.value() + 'rem';
             tgt.adom().style(setmgn);
         } catch (e) {
             console.error(e.stack);
