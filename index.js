@@ -6,11 +6,18 @@
 const mf = require('mofron');
 
 mf.layout.Margin = class extends mf.Layout {
+    /**
+     * initialize margin layout
+     *
+     * @param p1 (object) layout option
+     * @param p1 (string) margin type
+     * @param p2 (string) margin size value
+     */
     constructor (po, p2) {
         try {
             super();
             this.name('Margin');
-            this.prmMap('type', 'value');
+            this.prmMap(['type', 'value']);
             this.prmOpt(po, p2);
         } catch (e) {
             console.error(e.stack);
@@ -18,11 +25,16 @@ mf.layout.Margin = class extends mf.Layout {
         }
     }
     
+    /**
+     * margin layout
+     *
+     * @note private method
+     */
     contents (idx, tgt) {
         try {
             let mg     = (null === this.type()) ? 'margin' : 'margin' + '-' + this.type();
             let setmgn = {};
-            setmgn[mg] = this.value().toString();
+            setmgn[mg] = this.value();
             tgt.adom().style(setmgn);
         } catch (e) {
             console.error(e.stack);
@@ -30,34 +42,41 @@ mf.layout.Margin = class extends mf.Layout {
         }
     }
     
+    /**
+     * setter/getter margin type
+     *
+     * @param p1 (string) margin type ('top', 'right', 'bottom', 'left')
+     * @param p1 (undefined) call as getter
+     * @return (string) margin type
+     */
     type (prm) {
         try {
-            if (undefined === prm) {
-                 /* getter */
-                 return (undefined === this.m_type) ? null : this.m_type;
-            }
-            /* setter */
-            if ( ('top'    !== prm) &&
-                 ('right'  !== prm) &&
-                 ('bottom' !== prm) &&
-                 ('left'   !== prm) ) {
-                throw new Error('invalid parameter');
-            }
-            this.m_type = prm;
+            return this.member(
+                'type',
+                ['top', 'right', 'bottom', 'left'],
+                prm
+            );
         } catch (e) {
             console.error(e.stack);
             throw e;
         }
     }
     
+    /**
+     * setter/getter margin size value
+     *
+     * @param (string) margin size (css value)
+     * @param (undefined) call as getter
+     * @return (string) margin size (css value)
+     */
     value (prm) {
         try {
-            if (undefined === prm) {
-                 /* getter */
-                 return (undefined === this.m_value) ? null : this.m_value;
-            }
-            /* setter */
-            this.m_value = mf.func.getSizeObj(prm);
+            return this.member(
+                'value',
+                'string',
+                (undefined !== prm) ? mf.func.getSize(prm).toString() : prm,
+                '0.25rem'
+            );
         } catch (e) {
             console.error(e.stack);
             throw e;
