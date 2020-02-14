@@ -1,22 +1,35 @@
 # mofron-layout-margin
-margin layout for [mofron](https://github.com/simpart/mofron).<br>
+[mofron](https://mofron.github.io/mofron/) is module based frontend framework.
+
+margin layout of mofron
+
+target child component is got margin style.
+
 
 # Install
-```bash
-mofron install mofron-layout-padding
+```
+npm install mofron mofron-layout-margin
 ```
 
 # Sample
-```javascript
-require('mofron');
-let Text    = require('mofron-comp-text');
-let Margin = require('mofron-layout-margin');
+```html
+<require>
+    <tag load="mofron-layout-text">Text<tag>
+    <tag load="mofron-layout-margin">Margin<tag>
+</require>
 
-new mofron.Component({
-    layout  : new Margin('left',100),   // margin layout
-    child   : [new Text('child 1'),
-               new Text('child 2'),
-               new Text('child 3')],
-    visible : true
-});
+<div layout=Margin:(left,0.5rem)>
+    <Text>Margin</Text>
+    <Text>Layout</Text>
+</div>
 ```
+
+# Parameter
+
+| Short<br>Form | Parameter Name | Type | Description |
+|:-------------:|:---------------|:-----|:------------|
+| ◯  | type | string | margin type ('top', 'right', 'bottom', 'left') |
+| | | | undefined: call as getter |
+| ◯  | value | string(size) | margin size |
+| | | | undefined: call as getter |
+
