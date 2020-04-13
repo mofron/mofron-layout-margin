@@ -10,24 +10,25 @@ module.exports = class extends mofron.class.Layout {
     /**
      * initialize margin layout
      *
-     * @param (mixed) ConfArg: type,value parameter
-     *                key-value: layout config
+     * @param (mixed) type config parameter
+     *                dict: layout config list
+     * @param (string(size)) value config parameter
      * @short type,value
      * @type private
      */
-    constructor (prm) {
+    constructor (p1,p2) {
         try {
             super();
             this.name('Margin');
             this.shortForm('type', 'value');
-
+            
             /* init config */
             this.confmng().add('type', { type: 'string', select: ['top', 'right', 'bottom', 'left'] });
             this.confmng().add('value', { type: 'size', init: '0.25rem' });
             
 	    /* set config */
-	    if (undefined !== prm) {
-                this.config(prm);
+	    if (0 < arguments.length) {
+                this.config(p1,p2);
 	    }
         } catch (e) {
             console.error(e.stack);
@@ -74,7 +75,7 @@ module.exports = class extends mofron.class.Layout {
      * margin size value setter/getter
      *
      * @param (string(size)) margin size
-     *                 undefined: call as getter
+     *                       undefined: call as getter
      * @return (string(size)) margin size
      * @type parameter
      */

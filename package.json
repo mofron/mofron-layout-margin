@@ -1,6 +1,6 @@
 {
   "name": "mofron-layout-margin",
-  "version": "0.3.0",
+  "version": "0.3.2",
   "description": "margin layout of mofron",
   "main": "index.js",
   "scripts": {
@@ -8,17 +8,17 @@
   },
   "repository": {
     "type": "git",
-    "url": "git+https://github.com/simpart/mofron-layout-margin.git"
+    "url": "git+https://github.com/mofron/mofron-layout-margin.git"
   },
   "keywords": [
     "mofron"
   ],
   "author": "simpart",
-  "license": "SEE LICENSE IN LICENSE",
+  "license": "MIT",
   "bugs": {
-    "url": "https://github.com/simpart/mofron-layout-margin/issues"
+    "url": "https://github.com/mofron/mofron-layout-margin/issues"
   },
-  "homepage": "https://github.com/simpart/mofron-layout-margin#readme",
+  "homepage": "https://github.com/mofron/mofron-layout-margin#readme",
   "devDependencies": {
   }
 }
