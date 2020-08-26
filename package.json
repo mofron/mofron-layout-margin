@@ -1,6 +1,6 @@
 {
   "name": "mofron-layout-margin",
-  "version": "0.3.2",
+  "version": "0.4.0",
   "description": "margin layout of mofron",
   "main": "index.js",
   "scripts": {
@@ -11,7 +11,7 @@
     "url": "git+https://github.com/mofron/mofron-layout-margin.git"
   },
   "keywords": [
-    "mofron"
+    "front-end","mofron"
   ],
   "author": "simpart",
   "license": "MIT",

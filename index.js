@@ -19,7 +19,7 @@ module.exports = class extends mofron.class.Layout {
     constructor (p1,p2) {
         try {
             super();
-            this.name('Margin');
+            this.modname('Margin');
             this.shortForm('type', 'value');
             
             /* init config */

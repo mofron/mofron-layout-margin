@@ -13,10 +13,10 @@ npm install mofron mofron-layout-margin
 
 # Sample
 ```html
-<require>
+<setting>
     <tag load="mofron-layout-text">Text<tag>
     <tag load="mofron-layout-margin">Margin<tag>
-</require>
+</setting>
 
 <div layout=Margin:(left,0.5rem)>
     <Text>Margin</Text>
